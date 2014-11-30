@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Unit\DependencyInjection;
+namespace Pellr\CmsBundle\Tests\Unit\DependencyInjection;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionTestCase;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection\CmfSimpleCmsExtension;
+use Pellr\CmsBundle\DependencyInjection\PellrCmsExtension;
 
-class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
+class PellrCmsExtensionTest extends AbstractExtensionTestCase
 {
     protected function getContainerExtensions()
     {
         return array(
-            new CmfSimpleCmsExtension(),
+            new PellrCmsExtension(),
         );
     }
 
@@ -35,12 +35,12 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
             ),
         ));
 
-        $this->assertContainerBuilderHasService('cmf_simple_cms.initializer', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Initializer\HomepageInitializer');
-        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.migrator.page', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr\Page');
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall('cmf_simple_cms.persistence.phpcr.menu_provider', 'setManagerName', array(
+        $this->assertContainerBuilderHasService(PellrCmsExtension::ALIAS.'.initializer', 'Pellr\SimpleCms\HomepageInitializer');
+        $this->assertContainerBuilderHasService(PellrCmsExtension::ALIAS.'.persistence.phpcr.migrator.page', 'Pellr\CmsBundle\Migrator\Phpcr\Page');
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(PellrCmsExtension::ALIAS.'.persistence.phpcr.menu_provider', 'setManagerName', array(
             '%cmf_simple_cms.persistence.phpcr.manager_name%',
         ));
-        $this->assertContainerBuilderHasService('cmf_simple_cms.persistence.phpcr.admin.page', 'Symfony\Cmf\Bundle\SimpleCmsBundle\Admin\PageAdmin');
+        $this->assertContainerBuilderHasService(PellrCmsExtension::ALIAS.'.persistence.phpcr.admin.page', 'Pellr\CmsBundle\Admin\PageAdmin');
     }
 
     public function testLoadMinimal()
@@ -55,7 +55,7 @@ class CmfSimpleCmsExtensionTest extends AbstractExtensionTestCase
             'use_menu' => false,
         ));
 
-        $this->assertFalse($this->container->has('cmf_simple_cms.persistence.phpcr.admin.page'));
-        $this->assertFalse($this->container->has('cmf_simple_cms.persistence.phpcr.menu_provider'));
+        $this->assertFalse($this->container->has(PellrCmsExtension::ALIAS.'.persistence.phpcr.admin.page'));
+        $this->assertFalse($this->container->has(PellrCmsExtension::ALIAS.'.persistence.phpcr.menu_provider'));
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection;
+namespace Pellr\CmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -20,8 +20,19 @@ use Symfony\Component\Config\FileLocator;
 
 use PHPCR\Util\PathHelper;
 
-class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterface
+class PellrCmsExtension extends Extension implements PrependExtensionInterface
 {
+    const ALIAS = 'pellr_cms';
+    const PHPCR_BASEPATH = '/cms/pages';
+
+    /**
+     * @return string
+     */
+    public function getAlias()
+    {
+        return self::ALIAS;
+    }
+
     /**
      * Allow an extension to prepend the extension configurations.
      *
@@ -51,7 +62,7 @@ class CmfSimpleCmsExtension extends Extension implements PrependExtensionInterfa
             )
         );
         if (isset($config['persistence']['phpcr']['basepath'])
-            && '/cms/simple' != $config['persistence']['phpcr']['basepath']
+            && self::PHPCR_BASEPATH != $config['persistence']['phpcr']['basepath']
         ) {
             $prependConfig['dynamic']['persistence']['phpcr']['route_basepaths'] = array($config['persistence']['phpcr']['basepath']);
         }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection;
+namespace Pellr\CmsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -20,24 +20,28 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $treeBuilder->root('cmf_simple_cms')
+        $treeBuilder->root(PellrCmsExtension::ALIAS)
             ->children()
+
                 ->arrayNode('persistence')
                     ->addDefaultsIfNotSet()
                     ->children()
+
                         ->arrayNode('phpcr')
                             ->addDefaultsIfNotSet()
                             ->canBeEnabled()
                             ->children()
-                                ->scalarNode('basepath')->defaultValue('/cms/simple')->end()
+
+                                ->scalarNode('basepath')->defaultValue(PellrCmsExtension::PHPCR_BASEPATH)->end()
                                 ->scalarNode('manager_registry')->defaultValue('doctrine_phpcr')->end()
                                 ->scalarNode('manager_name')->defaultNull()->end()
-                                ->scalarNode('document_class')->defaultValue('Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page')->end()
+                                ->scalarNode('document_class')->defaultValue('Pellr\CmsBundle\Doctrine\Phpcr\Page')->end()
 
                                 ->enumNode('use_sonata_admin')
                                     ->values(array(true, false, 'auto'))
                                     ->defaultValue('auto')
                                 ->end()
+
                                 ->arrayNode('sonata_admin')
                                     ->children()
                                         ->enumNode('sort')
@@ -46,30 +50,17 @@ class Configuration implements ConfigurationInterface
                                         ->end()
                                     ->end()
                                 ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
+
+                            ->end() // persistence.phpcr children
+                        ->end() // persistence.phpcr
+                    ->end() // persistence children
+                ->end() // persistence[]
 
                 ->enumNode('use_menu')
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
                 ->end()
 
-                ->arrayNode('routing')
-                    ->info('removed')
-                    ->beforeNormalization()
-                        ->ifArray()
-                        ->thenInvalid('The SimpleCmsBundle routing configuration has moved to cmf_routing.dynamic')
-                    ->end()
-                ->end()
-                ->arrayNode('multilang')
-                    ->info('removed')
-                    ->beforeNormalization()
-                        ->ifArray()
-                        ->thenInvalid('The SimpleCmsBundle locale configuration is not needed anymore')
-                    ->end()
-                ->end()
             ->end()
         ;
 

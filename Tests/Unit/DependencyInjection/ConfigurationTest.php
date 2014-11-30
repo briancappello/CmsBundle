@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Unit\DependencyInjection;
+namespace Pellr\CmsBundle\Tests\Unit\DependencyInjection;
 
-use Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection\CmfSimpleCmsExtension;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\DependencyInjection\Configuration;
+use Pellr\CmsBundle\DependencyInjection\PellrCmsExtension;
+use Pellr\CmsBundle\DependencyInjection\Configuration;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractExtensionConfigurationTestCase;
 
 class ConfigurationTest extends AbstractExtensionConfigurationTestCase
 {
     protected function getContainerExtension()
     {
-        return new CmfSimpleCmsExtension();
+        return new PellrCmsExtension();
     }
 
     protected function getConfiguration()
@@ -33,10 +33,10 @@ class ConfigurationTest extends AbstractExtensionConfigurationTestCase
             'persistence' => array(
                 'phpcr' => array(
                     'enabled' => true,
-                    'basepath' => '/cms/simple',
+                    'basepath' => PellrCmsExtension::PHPCR_BASEPATH,
                     'manager_registry' => 'doctrine_phpcr',
                     'manager_name' => null,
-                    'document_class' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page',
+                    'document_class' => 'Pellr\CmsBundle\Doctrine\Phpcr\Page',
                     'use_sonata_admin' => true,
                     'sonata_admin' => array(
                         'sort' => 'asc',

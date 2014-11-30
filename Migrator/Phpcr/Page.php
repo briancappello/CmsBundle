@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr;
+namespace Pellr\CmsBundle\Migrator\Phpcr;
 
 use Symfony\Component\Yaml\Parser;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -79,7 +79,7 @@ class Page implements MigratorInterface
 
         NodeHelper::createPath($this->session, preg_replace('#/[^/]*$#', '', $this->basepath));
 
-        $class = isset($data['class']) ? $data['class'] : 'Symfony\\Cmf\\Bundle\\SimpleCmsBundle\\Doctrine\\Phpcr\\Page';
+        $class = isset($data['class']) ? $data['class'] : 'Pellr\\CmsBundle\\Doctrine\\Phpcr\\Page';
 
         $page = $this->dm->find($class, $path);
         if (!$page) {

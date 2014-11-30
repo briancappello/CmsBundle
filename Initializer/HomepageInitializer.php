@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Initializer;
+namespace Pellr\CmsBundle\Initializer;
 
 use PHPCR\Util\NodeHelper;
 use PHPCR\Util\PathHelper;
@@ -36,7 +36,7 @@ class HomepageInitializer implements InitializerInterface
     public function init(ManagerRegistry $registry)
     {
         /** @var $dm DocumentManager */
-        $dm = $registry->getManagerForClass('Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page');
+        $dm = $registry->getManagerForClass($this->documentClass);
         if ($dm->find(null, $this->basePath)) {
             return;
         }
@@ -44,13 +44,20 @@ class HomepageInitializer implements InitializerInterface
         $session = $dm->getPhpcrSession();
         NodeHelper::createPath($session, PathHelper::getParentPath($this->basePath));
 
+        $website = new $this->documentClass;
+        $website->setId($this->basePath);
+        $website->setLabel('Website');
+        $website->setTitle('Website');
+        $website->setBody('This content will never be displayed');
+        $dm->persist($website);
+
         $page = new $this->documentClass;
-        $page->setId($this->basePath);
+        $page->setId($this->basePath.'/home');
         $page->setLabel('Home');
         $page->setTitle('Homepage');
         $page->setBody('Autocreated Homepage');
-
         $dm->persist($page);
+
         $dm->flush();
     }
 
@@ -59,6 +66,6 @@ class HomepageInitializer implements InitializerInterface
      */
     public function getName()
     {
-        return 'CmfSimpleCmsBundle Homepage';
+        return 'PellrCmsBundle';
     }
 }

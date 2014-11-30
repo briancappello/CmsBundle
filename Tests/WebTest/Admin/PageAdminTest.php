@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\WebTest\Admin;
+namespace Pellr\CmsBundle\Tests\WebTest\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
@@ -24,7 +24,7 @@ class PageAdminTest extends BaseTestCase
     public function setUp()
     {
         $this->db('PHPCR')->loadFixtures(array(
-            'Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Resources\DataFixtures\Phpcr\LoadPageData',
+            'Pellr\CmsBundle\Tests\Resources\DataFixtures\Phpcr\LoadPageData',
         ));
         $this->client = $this->createClient();
     }

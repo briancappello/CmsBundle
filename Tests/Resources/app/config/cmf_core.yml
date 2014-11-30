@@ -9,4 +9,4 @@ cmf_routing:
     dynamic:
         enabled: true
         templates_by_class:
-            Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page: ::layout.html.twig
+            Pellr\CmsBundle\Doctrine\Phpcr\Page: ::layout.html.twig

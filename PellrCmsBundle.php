@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle;
+namespace Pellr\CmsBundle;
 
+use Pellr\CmsBundle\DependencyInjection\PellrCmsExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 
-class CmfSimpleCmsBundle extends Bundle
+class PellrCmsBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {
@@ -29,11 +30,11 @@ class CmfSimpleCmsBundle extends Bundle
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
-                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr',
+                        realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Pellr\CmsBundle\Doctrine\Phpcr',
                     ),
-                    array('cmf_simple_cms.persistence.phpcr.manager_name'),
+                    array(PellrCmsExtension::ALIAS.'.persistence.phpcr.manager_name'),
                     false,
-                    array('CmfSimpleCmsBundle' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr')
+                    array('PellrCmsBundle' => 'Pellr\CmsBundle\Doctrine\Phpcr')
                 )
             );
         }

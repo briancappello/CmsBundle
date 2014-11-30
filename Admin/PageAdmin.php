@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Admin;
+namespace Pellr\CmsBundle\Admin;
 
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\DoctrinePHPCRAdminBundle\Admin\Admin;
 use Symfony\Cmf\Bundle\RoutingBundle\Admin\RouteAdmin;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page;
+use Pellr\CmsBundle\Doctrine\Phpcr\Page;
 
 class PageAdmin extends RouteAdmin
 {
-    protected $translationDomain = 'CmfSimpleCmsBundle';
+    protected $translationDomain = 'PellrCmsBundle';
 
     private $sortOrder = false;
 
@@ -53,7 +52,7 @@ class PageAdmin extends RouteAdmin
 
         $formMapper
             ->with('form.group_general', array(
-                'translation_domain' => 'CmfSimpleCmsBundle',
+                'translation_domain' => 'PellrCmsBundle',
             ))
                 ->add('label', null, array('required' => false))
                 ->add('title')

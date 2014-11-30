@@ -10,7 +10,7 @@
                 basepath="/cms/simple"
                 manager-registry="doctrine_phpcr"
                 manager-name="null"
-                document-class="Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page"
+                document-class="Pellr\CmsBundle\Doctrine\Phpcr\Page"
                 use-sonata-admin="true"
             >
                 <sonata-admin sort="asc" />

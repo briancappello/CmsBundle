@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Cmf\Bundle\SimpleCmsBundle\Tests\Functional\Migrator\Phpcr;
+namespace Pellr\CmsBundle\Tests\Functional\Migrator\Phpcr;
 
 use Doctrine\ODM\PHPCR\DocumentManager;
+use Pellr\CmsBundle\DependencyInjection\PellrCmsExtension;
 use Symfony\Cmf\Component\Testing\Functional\BaseTestCase;
-use Symfony\Cmf\Bundle\SimpleCmsBundle\Migrator\Phpcr\Page;
+use Pellr\CmsBundle\Migrator\Phpcr\Page;
 
 class PageTest extends BaseTestCase
 {
@@ -32,7 +33,7 @@ class PageTest extends BaseTestCase
         $this->db('PHPCR')->createTestNode();
         $this->dm = $this->db('PHPCR')->getOm();
         $this->baseNode = $this->dm->find(null, '/test');
-        $this->migrator = $this->getContainer()->get('cmf_simple_cms.persistence.phpcr.migrator.page');
+        $this->migrator = $this->getContainer()->get(PellrCmsExtension::ALIAS.'.persistence.phpcr.migrator.page');
     }
 
     public function testMigrator()

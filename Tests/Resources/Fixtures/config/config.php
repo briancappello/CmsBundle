@@ -1,13 +1,13 @@
 <?php
 
-$container->loadFromExtension('cmf_simple_cms', array(
+$container->loadFromExtension(\Pellr\CmsBundle\DependencyInjection\PellrCmsExtension::ALIAS, array(
     'persistence' => array(
         'phpcr' => array(
             'enabled' => true,
-            'basepath' => '/cms/simple',
+            'basepath' => \Pellr\CmsBundle\DependencyInjection\PellrCmsExtension::PHPCR_BASEPATH,
             'manager_registry' => 'doctrine_phpcr',
             'manager_name' => null,
-            'document_class' => 'Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page',
+            'document_class' => 'Pellr\CmsBundle\Doctrine\Phpcr\Page',
             'use_sonata_admin' => true,
             'sonata_admin' => array(
                 'sort' => 'asc',

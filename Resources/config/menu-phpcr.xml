@@ -3,19 +3,19 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="cmf_simple_cms.persistence.phpcr.menu_provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider</parameter>
+        <parameter key="pellr_cms.persistence.phpcr.menu_provider.class">Symfony\Cmf\Bundle\MenuBundle\Provider\PhpcrMenuProvider</parameter>
     </parameters>
 
     <services>
 
         <service
-            id="cmf_simple_cms.persistence.phpcr.menu_provider"
-            class="%cmf_simple_cms.persistence.phpcr.menu_provider.class%">
+            id="pellr_cms.persistence.phpcr.menu_provider"
+            class="%pellr_cms.persistence.phpcr.menu_provider.class%">
             <tag name="knp_menu.provider" />
             <argument type="service" id="cmf_menu.factory"/>
             <argument type="service" id="doctrine_phpcr"/>
-            <argument>%cmf_simple_cms.persistence.phpcr.menu_basepath%</argument>
-            <call method="setManagerName"><argument>%cmf_simple_cms.persistence.phpcr.manager_name%</argument></call>
+            <argument>%pellr_cms.persistence.phpcr.menu_basepath%</argument>
+            <call method="setManagerName"><argument>%pellr_cms.persistence.phpcr.manager_name%</argument></call>
             <call method="setRequest"><argument type="service" id="request" on-invalid="null" strict="false"/></call>
         </service>
 

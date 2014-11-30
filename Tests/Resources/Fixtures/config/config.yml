@@ -5,7 +5,7 @@ cmf_simple_cms:
             basepath: /cms/simple
             manager_registry: doctrine_phpcr
             manager_name: ~
-            document_class: Symfony\Cmf\Bundle\SimpleCmsBundle\Doctrine\Phpcr\Page
+            document_class: Pellr\CmsBundle\Doctrine\Phpcr\Page
             use_sonata_admin: true
             sonata_admin:
                 sort: asc
