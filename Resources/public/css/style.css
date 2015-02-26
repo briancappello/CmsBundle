@@ -6,3 +6,11 @@
     background-color: #EEE;
     border-color: #CCC;
 }
+.sonata-bc .left-side div,
+.sonata-bc .left-side span,
+.sonata-bc .left-side p {
+    color: #F6F6F6;
+}
+.skin-black .sidebar > .sidebar-menu > li:last-of-type {
+    border-bottom: 1px solid #444;
+}
