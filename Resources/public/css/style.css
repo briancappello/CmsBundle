@@ -1,0 +1,8 @@
+.sonata-bc .navbar-form {
+    display: inline-block;
+    float: left;
+}
+.sonata-bc .navbar-form .btn-flat {
+    background-color: #EEE;
+    border-color: #CCC;
+}
