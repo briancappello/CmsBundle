@@ -14,3 +14,13 @@
 .skin-black .sidebar > .sidebar-menu > li:last-of-type {
     border-bottom: 1px solid #444;
 }
+
+ul.admin-actions {
+    list-style: none;
+    float: right;
+}
+ul.admin-actions li {
+    display: inline-block;
+    height: 38px;
+    padding: 14px;
+}
