@@ -44,19 +44,13 @@ class HomepageInitializer implements InitializerInterface
         $session = $dm->getPhpcrSession();
         NodeHelper::createPath($session, PathHelper::getParentPath($this->basePath));
 
-        $website = new $this->documentClass;
-        $website->setId($this->basePath);
-        $website->setLabel('Website');
-        $website->setTitle('Website');
-        $website->setBody('This content will never be displayed');
-        $dm->persist($website);
+        $homepage = new $this->documentClass;
+        $homepage->setId($this->basePath);
+        $homepage->setLabel('Home');
+        $homepage->setTitle('Home');
+        $homepage->setBody('Homepage content.');
 
-        $page = new $this->documentClass;
-        $page->setId($this->basePath.'/home');
-        $page->setLabel('Home');
-        $page->setTitle('Homepage');
-        $page->setBody('Autocreated Homepage');
-        $dm->persist($page);
+        $dm->persist($homepage);
 
         $dm->flush();
     }
