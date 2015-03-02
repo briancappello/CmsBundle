@@ -1,10 +1,9 @@
 .sonata-bc .navbar-form {
-    display: inline-block;
-    float: left;
-}
-.sonata-bc .navbar-form .btn-flat {
-    background-color: #EEE;
-    border-color: #CCC;
+    margin: 8px 0;
+    padding: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
 }
 .sonata-bc .left-side div,
 .sonata-bc .left-side span,
