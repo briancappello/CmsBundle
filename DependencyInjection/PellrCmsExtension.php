@@ -73,6 +73,7 @@ class PellrCmsExtension extends Extension implements PrependExtensionInterface
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
 
         if ($config['persistence']['phpcr']) {
             $this->loadPhpcr($config['persistence']['phpcr'], $loader, $container);

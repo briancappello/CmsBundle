@@ -17,7 +17,7 @@ file that was distributed with this source code.
 {% set _content      = block('content') %}
 {% set _title        = block('title') %}
 {% set _breadcrumb   = block('breadcrumb') %}
-{% set _actions      = block('actions') %}
+{% set _actions      = block('actions')|strip_empty_tags %}
 {% set _navbar_title = block('navbar_title') %}
 <!DOCTYPE html>
 <html {% block html_attributes %}class="no-js no-stretch"{% endblock %}>
