@@ -32,7 +32,7 @@ class Configuration implements ConfigurationInterface
                             ->canBeEnabled()
                             ->children()
 
-                                ->scalarNode('basepath')->defaultValue(PellrCmsExtension::PHPCR_BASEPATH)->end()
+                                ->scalarNode('basepath')->defaultValue('/cms')->end()
                                 ->scalarNode('manager_registry')->defaultValue('doctrine_phpcr')->end()
                                 ->scalarNode('manager_name')->defaultNull()->end()
                                 ->scalarNode('document_class')->defaultValue('Pellr\CmsBundle\Doctrine\Phpcr\Page')->end()

@@ -23,7 +23,6 @@ use PHPCR\Util\PathHelper;
 class PellrCmsExtension extends Extension implements PrependExtensionInterface
 {
     const ALIAS = 'pellr_cms';
-    const PHPCR_BASEPATH = '/cms/main';
 
     /**
      * @return string

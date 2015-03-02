@@ -12,7 +12,6 @@
 namespace Pellr\CmsBundle\Initializer;
 
 use PHPCR\Util\NodeHelper;
-use PHPCR\Util\PathHelper;
 
 use Doctrine\Bundle\PHPCRBundle\Initializer\InitializerInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
@@ -37,15 +36,16 @@ class HomepageInitializer implements InitializerInterface
     {
         /** @var $dm DocumentManager */
         $dm = $registry->getManagerForClass($this->documentClass);
-        if ($dm->find(null, $this->basePath)) {
-            return;
-        }
 
         $session = $dm->getPhpcrSession();
-        NodeHelper::createPath($session, PathHelper::getParentPath($this->basePath));
+
+        if (!$root = $dm->find(null, $this->basePath)) {
+            $root = NodeHelper::createPath($session, $this->basePath);
+        }
 
         $homepage = new $this->documentClass;
-        $homepage->setId($this->basePath);
+        $homepage->setParentDocument($root);
+        $homepage->setName('home');
         $homepage->setLabel('Home');
         $homepage->setTitle('Home');
         $homepage->setBody('Homepage content.');

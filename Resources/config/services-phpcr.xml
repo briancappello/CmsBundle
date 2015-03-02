@@ -8,10 +8,7 @@
     </parameters>
 
     <services>
-        <service
-            id="pellr_cms.initializer"
-            class="%pellr_cms.initializer.class%"
-        >
+        <service id="pellr_cms.initializer" class="%pellr_cms.initializer.class%">
             <argument>%pellr_cms.persistence.phpcr.basepath%</argument>
             <argument>%pellr_cms.persistence.phpcr.document.class%</argument>
             <tag name="doctrine_phpcr.initializer"/>
