@@ -67,7 +67,7 @@ class PageAdmin extends RouteAdmin
                 ->add('label', null, array('required' => false))
                 ->add('name')
                 ->add('title')
-                ->add('body', 'textarea')
+                ->add('body', 'ckeditor')
             ->end()
 
             ->with('form.group_advanced', array(

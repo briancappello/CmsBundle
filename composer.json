@@ -22,7 +22,8 @@
         "doctrine/phpcr-bundle": "~1.1",
         "doctrine/phpcr-odm": "~1.1",
         "sonata-project/seo-bundle": "~1.1.8",
-        "symfony-cmf/seo-content-bundle": "1.1.*"
+        "symfony-cmf/seo-bundle": "1.1.*",
+        "egeloen/ckeditor-bundle": "~3.0"
     },
     "require-dev": {
         "symfony-cmf/testing": "~1.2",
