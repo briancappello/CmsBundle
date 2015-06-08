@@ -20,6 +20,9 @@ use Symfony\Cmf\Bundle\CoreBundle\PublishWorkflow\PublishableInterface;
 use Symfony\Cmf\Bundle\CoreBundle\Translatable\TranslatableInterface;
 use Symfony\Cmf\Bundle\MenuBundle\Model\MenuOptionsInterface;
 use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
+use Symfony\Cmf\Bundle\SeoBundle\SeoAwareInterface;
+use Symfony\Cmf\Bundle\SeoBundle\Model\SeoMetadataInterface;
+use Symfony\Cmf\Component\Routing\RouteObjectInterface;
 use Symfony\Cmf\Component\Routing\RouteReferrersReadInterface;
 use PHPCR\NodeInterface as PHPCRNodeInterface;
 
@@ -42,7 +45,8 @@ class Page extends Route implements
     PublishTimePeriodInterface,
     PublishableInterface,
     MenuOptionsInterface,
-    TranslatableInterface
+    TranslatableInterface,
+    SeoAwareInterface
 {
     /**
      * @var NodeInterface
@@ -151,20 +155,9 @@ class Page extends Route implements
     protected $extras = array();
 
     /**
-     * @deprecated use getOption('add_locale_pattern') instead
+     * @var SeoMetadataInterface
      */
-    public function getAddLocalePattern()
-    {
-        return $this->getOption('add_locale_pattern');
-    }
-
-    /**
-     * @deprecated use setOption('add_locale_pattern', $bool) instead
-     */
-    public function setAddLocalePattern($addLocalePattern)
-    {
-        $this->setOption('add_locale_pattern', $addLocalePattern);
-    }
+    protected $seoMetadata;
 
     /**
      * @return NodeInterface
@@ -188,18 +181,6 @@ class Page extends Route implements
     public function setLocale($locale)
     {
         $this->locale = $locale;
-    }
-
-    /**
-     * @deprecated Since 1.1 we only have the publish start date
-     *
-     * This method is kept for BC but will return the result of getDate().
-     *
-     * @return \DateTime
-     */
-    public function getCreateDate()
-    {
-        return $this->getDate();
     }
 
     /**
@@ -676,6 +657,32 @@ class Page extends Route implements
         );
     }
 
+    public function setController($controller)
+    {
+        if ($controller) {
+            $this->setDefault(RouteObjectInterface::CONTROLLER_NAME, $controller);
+        } else {
+            $defaults = $this->getDefaults();
+            unset($defaults[RouteObjectInterface::CONTROLLER_NAME]);
+            $this->setDefaults($defaults);
+        }
+
+        return $this;
+    }
+
+    public function setTemplate($template)
+    {
+        if ($template) {
+            $this->setDefault(RouteObjectInterface::TEMPLATE_NAME, $template);
+        } else {
+            $defaults = $this->getDefaults();
+            unset($defaults[RouteObjectInterface::TEMPLATE_NAME]);
+            $this->setDefaults($defaults);
+        }
+
+        return $this;
+    }
+
     public function getRouteOptions()
     {
         return parent::getOptions();
@@ -696,5 +703,33 @@ class Page extends Route implements
         $node = $this->getNode();
 
         return $node instanceof PHPCRNodeInterface ? $node->getIdentifier() : null;
+    }
+
+    /**
+     * @return SeoMetadataInterface
+     */
+    public function getSeoMetadata()
+    {
+        return $this->seoMetadata;
+    }
+
+    /**
+     * @param SeoMetadataInterface|array $metadata
+     * @return Page
+     */
+    public function setSeoMetadata($metadata)
+    {
+        $this->seoMetadata = $metadata;
+
+        if (method_exists($metadata, 'setParentDocument')) {
+            $metadata->setParentDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return (string)($this->label ?: $this->name);
     }
 }

@@ -27,6 +27,11 @@
         <field name="childrenAttributes" type="string" assoc=""/>
         <field name="linkAttributes" type="string" assoc=""/>
         <field name="labelAttributes" type="string" assoc=""/>
+        <reference-one name="seoMetadata" property="seoMetadata">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </reference-one>
     </document>
 
 </doctrine-mapping>

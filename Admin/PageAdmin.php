@@ -43,29 +43,44 @@ class PageAdmin extends RouteAdmin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        parent::configureFormFields($formMapper);
-
-        $formMapper->remove('content');
-
-        // remap to routeOptions
-        $formMapper->remove('options');
+        $formMapper
+            ->with('form.group_general', array(
+                'translation_domain' => 'CmfRoutingBundle',
+            ))
+                ->add(
+                    'parent',
+                    'doctrine_phpcr_odm_tree',
+                    array(
+                        'select_root_node' => true,
+                        'class' => $this->getClass(),
+                        'root_node' => '/cms',
+                    )
+                )
+                ->reorder(array('parent', 'name'))
+            ->end()
+        ;
 
         $formMapper
             ->with('form.group_general', array(
                 'translation_domain' => 'PellrCmsBundle',
             ))
                 ->add('label', null, array('required' => false))
+                ->add('name')
                 ->add('title')
                 ->add('body', 'textarea')
             ->end()
+
             ->with('form.group_advanced', array(
                 'translation_domain' => 'CmfRoutingBundle',
             ))
+                ->add('variablePattern', 'text', array('required' => false), array('help' => 'form.help_variable_pattern'))
                 ->add(
-                    'routeOptions',
+                    'defaults',
                     'sonata_type_immutable_array',
-                    array('keys' => $this->configureFieldsForOptions($this->getSubject()->getRouteOptions()), 'label' => 'form.label_options'),
-                    array('help' => 'form.help_options')
+                    array(
+                        'keys' => $this->configureFieldsForDefaults($this->getSubject()->getDefaults()),
+                        'required' => false,
+                    )
                 )
             ->end()
         ;

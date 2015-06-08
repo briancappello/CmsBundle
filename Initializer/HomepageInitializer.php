@@ -1,22 +1,16 @@
 <?php
 
-/*
- * This file is part of the Symfony CMF package.
- *
- * (c) 2011-2014 Symfony CMF
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Pellr\CmsBundle\Initializer;
 
-use PHPCR\Util\NodeHelper;
+use Pellr\CmsBundle\Doctrine\Phpcr\Page;
+use Pellr\CmsBundle\Doctrine\Phpcr\SeoMetadata;
 
 use Doctrine\Bundle\PHPCRBundle\Initializer\InitializerInterface;
 use Doctrine\ODM\PHPCR\DocumentManager;
 
 use Doctrine\Bundle\PHPCRBundle\ManagerRegistry;
+use PHPCR\Util\PathHelper;
+use PHPCR\Util\NodeHelper;
 
 class HomepageInitializer implements InitializerInterface
 {
@@ -40,15 +34,20 @@ class HomepageInitializer implements InitializerInterface
         $session = $dm->getPhpcrSession();
 
         if (!$root = $dm->find(null, $this->basePath)) {
-            $root = NodeHelper::createPath($session, $this->basePath);
+            $root = NodeHelper::createPath($session, PathHelper::getParentPath($this->basePath));
         }
 
+        /** @var Page $homepage */
         $homepage = new $this->documentClass;
         $homepage->setParentDocument($root);
         $homepage->setName('home');
         $homepage->setLabel('Home');
         $homepage->setTitle('Home');
         $homepage->setBody('Homepage content.');
+
+        $seo = new SeoMetadata();
+        $seo->setTitle('Home');
+        $homepage->setSeoMetadata($seo);
 
         $dm->persist($homepage);
 

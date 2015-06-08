@@ -30,6 +30,7 @@ class PellrCmsBundle extends Bundle
             $container->addCompilerPass(
                 DoctrinePhpcrMappingsPass::createXmlMappingDriver(
                     array(
+                        realpath(__DIR__ . '/Resources/config/doctrine-model') => 'Pellr\CmsBundle\Model',
                         realpath(__DIR__ . '/Resources/config/doctrine-phpcr') => 'Pellr\CmsBundle\Doctrine\Phpcr',
                     ),
                     array(PellrCmsExtension::ALIAS.'.persistence.phpcr.manager_name'),

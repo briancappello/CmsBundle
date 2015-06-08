@@ -182,5 +182,7 @@ file that was distributed with this source code.
 
     </div>
 {% endblock sonata_wrapper %}
+
+{% if form is defined %}{{ form_javascript(form) }}{% endif %}
 </body>
 </html>

@@ -81,12 +81,13 @@ class PellrCmsExtension extends Extension implements PrependExtensionInterface
                 $this->loadPhpcrMenu($config, $loader, $container);
             }
         }
+
+        $container->setParameter($this->getAlias().'.sitemap.path', $config['site']['sitemap']);
     }
 
     protected function loadPhpcr($config, XmlFileLoader $loader, ContainerBuilder $container)
     {
         $loader->load('services-phpcr.xml');
-        $loader->load('migrator-phpcr.xml');
 
         $prefix = $this->getAlias() . '.persistence.phpcr';
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/phpcr-odm/phpcr-mapping
+        https://github.com/doctrine/phpcr-odm/raw/master/doctrine-phpcr-odm-mapping.xsd"
+        >
+
+    <mapped-superclass name="Pellr\CmsBundle\Model\SeoMetadata" referenceable="true">
+        <locale name="locale" />
+        <field name="title" type="string" nullable="true" />
+        <field name="metaDescription" type="string" nullable="true" />
+        <field name="metaKeywords" type="string" nullable="true" />
+        <field name="originalUrl" type="string" nullable="true" />
+
+        <field name="extraNames" type="string" assoc="" nullable="true"  />
+        <field name="extraProperties" type="string" assoc="" nullable="true"  />
+        <field name="extraHttp" type="string" assoc="" nullable="true"  />
+    </mapped-superclass>
+</doctrine-mapping>

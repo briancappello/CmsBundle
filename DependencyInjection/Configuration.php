@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
 
-        $treeBuilder->root(PellrCmsExtension::ALIAS)
+        $treeBuilder->root('pellr_cms')
             ->children()
 
                 ->arrayNode('persistence')
@@ -59,6 +59,13 @@ class Configuration implements ConfigurationInterface
                 ->enumNode('use_menu')
                     ->values(array(true, false, 'auto'))
                     ->defaultValue('auto')
+                ->end()
+
+                ->arrayNode('site')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('sitemap')->end()
+                    ->end()
                 ->end()
 
             ->end()
